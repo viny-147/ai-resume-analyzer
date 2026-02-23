@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Result</title>
+</head>
+
+<body>
+  <h1>AI Analysis</h1>
+  <h2>Detected Skills:</h2>
+  <h3>soft_skills</h3>
+  <ul>
+    {{#each result.detected_skills.soft_skills}}
+    <li>{{this}}</li>
+    {{/each}}
+  </ul>
+  <h3>technical_skills</h3>
+  <ul>
+    {{#each result.detected_skills.technical_skills}}
+    <li>{{this}}</li>
+    {{/each}}
+  </ul>
+  <h3>Soft Skills</h3>
+  <ul>
+    {{#each result.detected_skills.soft_skills}}
+    <li>{{this}}</li>
+    {{/each}}
+  </ul>
+
+  <h3>Languages</h3>
+  <ul>
+    {{#each result.detected_skills.languages}}
+    <li>{{this}}</li>
+    {{/each}}
+  </ul>
+
+  <h3>Domain Knowledge</h3>
+  <ul>
+    {{#each result.detected_skills.domain_knowledge}}
+    <li>{{this}}</li>
+    {{/each}}
+  </ul>
+  <h2>Missing Skills</h2>
+  <h3>Technical & Software</h3>
+<ul>
+  {{#each result.missing_skills.technical_and_software}}
+    <li>{{this}}</li>
+  {{/each}}
+</ul>
+
+<h3>Professional & Project Management</h3>
+<ul>
+  {{#each result.missing_skills.professional_and_project_management}}
+    <li>{{this}}</li>
+  {{/each}}
+</ul>
+
+<h3>Certifications & Qualifications</h3>
+<ul>
+  {{#each result.missing_skills.certifications_and_qualifications}}
+    <li>{{this}}</li>
+  {{/each}}
+</ul>
+<h2>Career Suggestions</h2>
+<ul>
+  {{#each result.career_suggestions}}
+    <li>{{this}}</li>
+  {{/each}}
+</ul>
+<h3>Career Suggestions</h3>
+<ul>
+  {{#each result.career_suggestions}}
+    <li>{{this}}</li>
+  {{/each}}
+</ul>
+  <a href="/resume">Upload another</a>
+</body>
+
+</html>

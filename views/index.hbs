@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Resume Platform</title>
+</head>
+<body>
+  <h1>AI Resume Platform</h1>
+
+  <label>Select Feature:</label>
+  <select id="feature">
+    <option value="analyze">Resume Analyzer</option>
+    <option value="ats">ATS Score</option>
+    <option value="rewrite">Resume Rewrite (Coming Soon)</option>
+    <option value="interview">Interview Questions (Coming Soon)</option>
+  </select>
+
+  <br /><br />
+
+  <form id="resumeForm" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" required />
+
+    <br /><br />
+
+    <div id="jdSection" style="display:none;">
+      <textarea name="jobDescription" rows="8" cols="60"
+        placeholder="Paste Job Description here"></textarea>
+    </div>
+
+    <br />
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    const featureSelect = document.getElementById("feature");
+    const form = document.getElementById("resumeForm");
+    const jdSection = document.getElementById("jdSection");
+
+    featureSelect.addEventListener("change", () => {
+      const value = featureSelect.value;
+
+      // Show JD only for ATS
+      if (value === "ats") {
+        jdSection.style.display = "block";
+      } else {
+        jdSection.style.display = "none";
+      }
+    });
+
+    form.addEventListener("submit", () => {
+      const value = featureSelect.value;
+
+      if (value === "analyze") {
+        form.action = "/resume/analyze";
+      } else if (value === "ats") {
+        form.action = "/resume/atsScore";
+      } else if (value === "rewrite") {
+        alert("Coming soon!");
+      } else if (value === "interview") {
+        alert("Coming soon!");
+      }
+    });
+  </script>
+</body>
+</html>

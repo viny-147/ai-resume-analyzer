@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATS score</title>
+</head>
+
+<body>
+    <h2>ATS Score</h2>
+    <h1>{{result.ats_score}} / 100</h1>
+
+    <h3>Matched Keywords</h3>
+    <ul>
+        {{#each result.matched_keywords}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ul>
+
+    <h3>Missing Keywords</h3>
+    <ul>
+        {{#each result.missing_keywords}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ul>
+
+    <h3>Formatting Feedback</h3>
+    <p>{{result.formatting_feedback}}</p>
+
+    <h3>Experience Feedback</h3>
+    <p>{{result.experience_feedback}}</p>
+
+    <h3>Improvement Suggestions</h3>
+    <ul>
+        {{#each result.improvement_suggestions}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ul>
+</body>
+
+</html>

@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { GoogleGenAI } from '@google/genai';
+import { ResumeHelper } from './resume.helper';
+import { generateHtml } from '../scripts/generateHTML';
+import * as fs from 'fs';
 
 const pdfParse = require('pdf-parse');
 
@@ -7,7 +10,7 @@ const pdfParse = require('pdf-parse');
 export class ResumeService {
     private genAi: GoogleGenAI;
 
-    constructor(){
+    constructor(private readonly resumeHelper: ResumeHelper){
         this.genAi = new GoogleGenAI({});
     }
     async analyze(file: Express.Multer.File){
@@ -67,7 +70,7 @@ export class ResumeService {
 
     async calculateAts(file: Express.Multer.File, jobDescription: string){
        try{
-         const pdfData = await pdfParse(file.buffer);
+        const pdfData = await pdfParse(file.buffer);
         const resumtContent = pdfData.text;
 
         const prompt =`
@@ -111,5 +114,59 @@ export class ResumeService {
         console.error("ERROR: ", e);
         throw e;
        }
+    }
+
+    async rewriteService(file: Express.Multer.File, rewriteType: string){
+        try{
+            const pdfData = await pdfParse(file.buffer);
+            const resumtContent = pdfData.text;
+            const prompt = `
+            Your are a professional resume writter.
+            
+            Rewrite the following resume in a ${rewriteType} formate/style.
+            Improve clarity, grammer, spelling, structure, and impact.
+            make it ATS friendly.
+            
+            Resume:${resumtContent}
+            
+            return the result into valid json as in the below formate:
+            {
+                "name":"",
+                "phoneno":"",
+                "email":"",
+                "location":""
+                "profiles":[{
+                    "platform":"",
+                    "url":""
+                }],
+                "summary":"",
+                "skills":"",
+                "experience":[{}],
+                "education":[{}]
+            }`;
+
+            const res = await this.genAi.models.generateContent({
+                model: "gemini-2.5-flash",
+                contents: prompt,
+            });
+            const cleanedText = res.text
+                ?.replace(/```[\w]*\n?/g, '')
+                ?.trim() || 'Try after Sometime!';
+
+            const parsed = JSON.parse(cleanedText);
+            const resumeHelper = await this.resumeHelper.convertResultToJSON(parsed);
+
+            await this.resumeHelper.saveResumeFile(resumeHelper);
+            await generateHtml('elegant');
+            const html = fs.readFileSync('resume.html', 'utf-8');
+            return {
+                structured: JSON.stringify(resumeHelper),
+                preview: html
+            }
+        }
+        catch(e){
+            console.error("ERROR: ", e);
+            throw e;
+        }
     }
 }

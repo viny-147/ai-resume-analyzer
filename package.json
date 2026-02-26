@@ -26,6 +26,8 @@
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.1.14",
     "hbs": "^4.2.0",
+    "jsonresume-theme-clean": "^0.0.1",
+    "jsonresume-theme-elegant": "^1.16.1",
     "multer": "^2.0.2",
     "pdf-parse": "^1.1.1",
     "reflect-metadata": "^0.2.2",

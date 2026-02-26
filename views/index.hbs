@@ -10,8 +10,7 @@
   <select id="feature">
     <option value="analyze">Resume Analyzer</option>
     <option value="ats">ATS Score</option>
-    <option value="rewrite">Resume Rewrite (Coming Soon)</option>
-    <option value="interview">Interview Questions (Coming Soon)</option>
+    <option value="rewrite">Resume Rewrite</option>
   </select>
 
   <br /><br />
@@ -21,43 +20,54 @@
 
     <br /><br />
 
-    <div id="jdSection" style="display:none;">
+    <div id="jdSection" class="extra-feature" style="display:none;">
       <textarea name="jobDescription" rows="8" cols="60"
         placeholder="Paste Job Description here"></textarea>
     </div>
 
+    <br /><br />
+
+    <select id="rewriteType" name="rewriteType" class="extra-feature" style="display: none;">
+      <option value="professional">Professional</option>
+      <option value="concise">Concise</option>
+      <option value="impact">Impact-Driven</option>
+      <option value="technical">More Technical</option>
+    </select>
     <br />
     <button type="submit">Submit</button>
   </form>
 
   <script>
-    const featureSelect = document.getElementById("feature");
-    const form = document.getElementById("resumeForm");
-    const jdSection = document.getElementById("jdSection");
-
-    featureSelect.addEventListener("change", () => {
-      const value = featureSelect.value;
-
-      // Show JD only for ATS
-      if (value === "ats") {
-        jdSection.style.display = "block";
-      } else {
-        jdSection.style.display = "none";
+    const featureConfigs = {
+      analyze:{
+        action: '/resume/analyze',
+        extraFields:[]
+      },
+      ats:{
+        action: '/resume/atsScore',
+        extraFields:['jdSection']
+      },
+      rewrite:{
+        action: '/resume/resumeRewrite',
+        extraFields:['rewriteType']
       }
-    });
+    };
 
-    form.addEventListener("submit", () => {
-      const value = featureSelect.value;
+    document.getElementById('feature').addEventListener('change', function () {
+      const selectedConfig = this.value;
+      const extraElement = featureConfigs[selectedConfig];
 
-      if (value === "analyze") {
-        form.action = "/resume/analyze";
-      } else if (value === "ats") {
-        form.action = "/resume/atsScore";
-      } else if (value === "rewrite") {
-        alert("Coming soon!");
-      } else if (value === "interview") {
-        alert("Coming soon!");
-      }
+      //form actions.
+      document.getElementById('resumeForm').action = extraElement.action;
+      //To hide the extra fields.
+      document.querySelectorAll('.extra-feature').forEach(el =>{
+        el.style.display = 'none';
+      });
+
+      //show the required feature
+      extraElement.extraFields.forEach(id =>{
+        document.getElementById(id).style.display = 'block';
+      });
     });
   </script>
 </body>

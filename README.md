@@ -21,78 +21,128 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## 🚀 AI Resume Rewrite & Preview Platform
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+An AI-powered backend system that rewrites resumes, converts them into structured JSON, and generates real-time HTML previews using customizable themes. This project demonstrates strong backend architecture, API design, and data transformation skills.
 
-## Project setup
+## 📌 Project Overview
 
-```bash
-$ npm install
+This platform helps users:
+* Upload their resume
+* Rewrite and optimize it using AI
+* Convert unstructured resume content into structured JSON
+* Generate dynamic HTML previews with multiple themes
+* Ensure scalable and clean backend architecture
+
+This project was built to showcase backend engineering, API integrations, and system design capabilities.
+
+## 🧠 Key Features
+
+✅ AI-based resume rewriting
+✅ Resume parsing and normalization
+✅ Conversion to standardized JSON resume schema
+✅ Dynamic HTML generation
+✅ Theme-based resume preview
+✅ Secure API architecture
+✅ Scalable backend design
+✅ Modular and maintainable code
+
+## 🏗️ System Architecture
+
+1. User uploads a resume and selects the feature
+2. Backend processes based on the feature that was redirected to the respective API and uses AI
+3. Resume content converted into structured JSON
+4. JSON passed to resume CLI
+5. HTML preview generated
+6. Frontend displays preview
+
+## ⚙️ Tech Stack
+
+### Backend
+
+* Node.js
+* NestJS
+* TypeScript
+* REST APIs
+* Handlebars
+
+### AI & Processing
+
+* Gemini
+* Resume parsing
+* JSON transformation
+
+## 📂 Folder Structure
+
+```
+src
+ ├── resume
+ │   ├── controller
+ │   ├── service
+ │   └── helper
+ └── script
+     ├── generateHTML.ts
+     └── generatePdf.ts
+```
+## 🔄 Resume Processing Flow
+
+### Step 1: Resume Upload
+
+User uploads resume file or pastes content.
+
+### Step 2: AI Rewrite
+
+AI enhances:
+
+* Summary
+* Skills
+* Experience
+* Achievements
+
+### Step 3: Data Structuring
+
+Content is mapped into a standardized resume JSON format.
+
+### Step 4: HTML Generation
+
+Resume CLI generates theme-based HTML.
+
+### Step 5: Preview API
+
+Frontend fetches the preview using a secure API.
+
+## 🔐 Security Considerations
+
+* Input validation
+* Secure API handling
+* Sanitized HTML preview
+* Protection against injection attacks
+
+## 🚀 How to Run Locally
+
+### 1️⃣ Clone the repository
+
+```
+git clone https://github.com/your-username/ai-resume-analyzer.git
+cd ai-resume-analyzer
 ```
 
-## Compile and run the project
+### 2️⃣ Install dependencies
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```
+npm install
 ```
 
-## Run tests
+### 3️⃣ Configure environment variables
 
-```bash
-# unit tests
-$ npm run test
+Create `.env` file:
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```
+GEMINI_API_KEY=your_key
 ```
 
-## Deployment
+### 4️⃣ Run the application
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
 ```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+npm run start:dev
+```
